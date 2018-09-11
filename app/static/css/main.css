@@ -1,0 +1,55 @@
+body {
+  margin: 0px;
+  overflow-x: hidden;
+}
+
+footer {
+  padding: 25px;
+  color: rgba(255,255,255,.5)
+}
+
+.extra-margin {
+  margin: 50px 0px;
+}
+
+.center {
+  display: block;
+  margin: 20px auto;
+}
+
+.pic_text {
+  padding-top: 50px;
+}
+
+figcaption {
+  text-align: center;
+}
+
+.btn-primary {
+  color: rgba(255,255,255,.5);
+  background-color: #343a40!important;
+  border-color: #343a40!important;
+}
+
+.card {
+  margin: 25px;
+  padding: 25px;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+
+.no-box-space {
+  margin: 25px;
+  padding: 25px;
+}
+
+.card-subtitle {
+  font-style: italic;
+  padding-bottom: 10px;
+}
+
+.prof_pic {
+  position: relative;
+  top: 7px;
+  left: 7px;
+  width: 25px;
+}
