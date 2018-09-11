@@ -58,9 +58,8 @@ def index():
     return render_template('index.html', products=products)
 
 
-@app.route('/posts')
-def posts():
-    name = 'Max'
+@app.route('/posts/<name>', methods=['GET', 'POST'])
+def posts(name = 'Max'):
     people = {
         0: {
             'name': 'Max',
@@ -118,4 +117,4 @@ def posts():
             'tweet': 'This is a sample text. This is a sample text.'
         }
     }
-    return render_template('posts.html', people=people, name=name, posts=posts)
+    return render_template('posts.html', people=people, name=name, posts=posts, page='posts')
