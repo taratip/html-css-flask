@@ -32,13 +32,13 @@
           </div> <!-- Ends col for form -->
         </div> <!-- ends row for form -->
 
-        {% for k, v in posts.items() %}
-          {% if v.name == name %}
+        {% for post in posts %}
+          {% if post.name == name %}
             <div class="row card">
               <img class="prof_pic" src="http://placehold.it/25x25" alt="Person">
               <div class="col-md-10 offset-md-2">
-                  <p>{{ v.date }}</p>
-                  <h3>{{ v.tweet }}</h3>
+                  <p>{{ post.timestamp.date() }}</p>
+                  <h3>{{ post.tweet }}</h3>
               </div>
             </div> <!-- End row for cards -->
           {% endif %}

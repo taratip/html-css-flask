@@ -1,7 +1,8 @@
-from app import app
-from flask import render_template, url_for, redirect
+from app import app, db
+from flask import render_template, url_for, redirect, flash
 from app.forms import PostForm, TitleForm
 import datetime
+from app.models import Post
 
 
 @app.route('/')
@@ -122,17 +123,24 @@ def posts(name = 'Max'):
         }
     }
 
+    posts = Post.query.all()
+
     if form.validate_on_submit():
         tweet = form.post.data
         date = datetime.datetime.now().date()
-        length = len(posts_dict)
-        posts_dict[length] = {
-            'date': date,
-            'name': name,
-            'tweet': tweet
-        }
+        post = Post(tweet=tweet, timestamp=date, name=name)
+        db.session.add(post)
+        db.session.commit()
+        flash('You have successfully posted your tweet!')
+        return redirect(url_for('posts', name=name))
+        # length = len(posts_dict)
+        # posts_dict[length] = {
+        #     'date': date,
+        #     'name': name,
+        #     'tweet': tweet
+        # }
 
-    return render_template('posts.html', people=people, name=name, posts=posts_dict, page='posts', form=form)
+    return render_template('posts.html', people=people, name=name, posts=posts, page='posts', form=form)
 
 
 @app.route('/title', methods=['GET', 'POST'])
