@@ -22,7 +22,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        {% if page != 'posts' %}
+        {% if page == 'home' %}
           <li class="nav-item active">
         {% else %}
           <li class="nav-item">
@@ -42,6 +42,13 @@
           <li class="nav-item">
         {% endif %}
           <a class="nav-link" href="{{ url_for('posts', name='Kelly') }}">Kelly's Posts</a>
+        </li>
+        {% if page == 'title' %}
+          <li class="nav-item active">
+        {% else %}
+          <li class="nav-item">
+        {% endif %}
+          <a class="nav-link" href="{{ url_for('title') }}">Change Title</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

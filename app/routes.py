@@ -58,7 +58,7 @@ def index(title=''):
             'url': 'http://placehold.it/250x250'
         }
     }
-    return render_template('index.html', products=products, title=title)
+    return render_template('index.html', products=products, title=title, page='home')
 
 posts_dict = {
     0: {
@@ -143,4 +143,4 @@ def title():
         title = form2.title.data
         return redirect(url_for('index', title=title))
 
-    return render_template('title.html', form=form2)
+    return render_template('title.html', form=form2, page='title')
