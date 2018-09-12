@@ -1,12 +1,13 @@
 from app import app
 from flask import render_template, url_for, redirect
-from app.forms import PostForm
+from app.forms import PostForm, TitleForm
 import datetime
 
 
 @app.route('/')
 @app.route('/index')
-def index():
+@app.route('/index/<title>', methods=['GET', 'POST'])
+def index(title=''):
     products = {
         0: {
             'title': 'Soap',
@@ -57,7 +58,7 @@ def index():
             'url': 'http://placehold.it/250x250'
         }
     }
-    return render_template('index.html', products=products)
+    return render_template('index.html', products=products, title=title)
 
 posts_dict = {
     0: {
@@ -132,3 +133,14 @@ def posts(name = 'Max'):
         }
 
     return render_template('posts.html', people=people, name=name, posts=posts_dict, page='posts', form=form)
+
+
+@app.route('/title', methods=['GET', 'POST'])
+def title():
+    form2 = TitleForm()
+
+    if form2.validate_on_submit():
+        title = form2.title.data
+        return redirect(url_for('index', title=title))
+
+    return render_template('title.html', form=form2)
