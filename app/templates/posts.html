@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block title %}
   Posts - {{ super() }}
@@ -24,6 +25,13 @@
       </div> <!-- Ends col-md-3 -->
 
       <div class="col-md-8 offset-md-1">
+        <!-- Start post form -->
+        <div class="row card">
+          <div class="col-md-12">
+            {{ wtf.quick_form(form) }}
+          </div> <!-- Ends col for form -->
+        </div> <!-- ends row for form -->
+
         {% for k, v in posts.items() %}
           {% if v.name == name %}
             <div class="row card">
@@ -35,7 +43,7 @@
             </div> <!-- End row for cards -->
           {% endif %}
         {% endfor %}
-      </div>
-    </div>
-  </div>
+      </div> <!-- Ends column on right side for posts -->
+    </div> <!-- Ends row for entire page -->
+  </div> <!-- Ends container -->
 {% endblock %}

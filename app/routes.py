@@ -1,10 +1,13 @@
 from app import app
 from flask import render_template, url_for, redirect
+from app.forms import PostForm, DataForm
+import datetime
 
 
 @app.route('/')
 @app.route('/index')
-def index():
+@app.route('/index/<data>', methods=['GET', 'POST'])
+def index(data=''):
     products = {
         0: {
             'title': 'Soap',
@@ -55,11 +58,55 @@ def index():
             'url': 'http://placehold.it/250x250'
         }
     }
-    return render_template('index.html', products=products)
+    return render_template('index.html', products=products, data=data)
 
+posts_dict = {
+    0: {
+        'date': 'Sept. 9th, 2018',
+        'name': 'Max',
+        'tweet': 'Today I had cereal for breakfast.'
+    },
+    1: {
+        'date': 'July 1st, 2018',
+        'name': 'Kelly',
+        'tweet': 'Went for a run downtown.'
+    },
+    2: {
+        'date': 'June 21st, 2018',
+        'name': 'Max',
+        'tweet': 'Got a new job!! Working for the man.'
+    },
+    3: {
+        'date': 'March 4th, 2018',
+        'name': 'Kelly',
+        'tweet': 'Hiking is fun, get outside.'
+    },
+    4: {
+        'date': 'February 8th, 2018',
+        'name': 'Kelly',
+        'tweet': 'This is a sample text. This is a sample text.'
+    },
+    5: {
+        'date': 'October 10th, 2017',
+        'name': 'Max',
+        'tweet': 'This is a sample text. This is a sample text.'
+    },
+    6: {
+        'date': 'October 1st, 2017',
+        'name': 'Max',
+        'tweet': 'This is a sample text. This is a sample text.'
+    },
+    7: {
+        'date': 'Sept. 31st, 2017',
+        'name': 'Kelly',
+        'tweet': 'This is a sample text. This is a sample text.'
+    }
+}
 
 @app.route('/posts/<name>', methods=['GET', 'POST'])
 def posts(name = 'Max'):
+    form = PostForm()
+
     people = {
         0: {
             'name': 'Max',
@@ -75,46 +122,25 @@ def posts(name = 'Max'):
         }
     }
 
-    posts = {
-        0: {
-            'date': 'Sept. 9th, 2018',
-            'name': 'Max',
-            'tweet': 'Today I had cereal for breakfast.'
-        },
-        1: {
-            'date': 'July 1st, 2018',
-            'name': 'Kelly',
-            'tweet': 'Went for a run downtown.'
-        },
-        2: {
-            'date': 'June 21st, 2018',
-            'name': 'Max',
-            'tweet': 'Got a new job!! Working for the man.'
-        },
-        3: {
-            'date': 'March 4th, 2018',
-            'name': 'Kelly',
-            'tweet': 'Hiking is fun, get outside.'
-        },
-        4: {
-            'date': 'February 8th, 2018',
-            'name': 'Kelly',
-            'tweet': 'This is a sample text. This is a sample text.'
-        },
-        5: {
-            'date': 'October 10th, 2017',
-            'name': 'Max',
-            'tweet': 'This is a sample text. This is a sample text.'
-        },
-        6: {
-            'date': 'October 1st, 2017',
-            'name': 'Max',
-            'tweet': 'This is a sample text. This is a sample text.'
-        },
-        7: {
-            'date': 'Sept. 31st, 2017',
-            'name': 'Kelly',
-            'tweet': 'This is a sample text. This is a sample text.'
+    if form.validate_on_submit():
+        tweet = form.post.data
+        date = datetime.datetime.now().date()
+        length = len(posts_dict)
+        posts_dict[length] = {
+            'date': date,
+            'name': name,
+            'tweet': tweet
         }
-    }
-    return render_template('posts.html', people=people, name=name, posts=posts, page='posts')
+
+    return render_template('posts.html', people=people, name=name, posts=posts_dict, page='posts', form=form)
+
+
+@app.route('/data', methods=['GET', 'POST'])
+def data():
+    form = DataForm()
+
+    if form.validate_on_submit():
+        data = form.title.data
+        return redirect(url_for('index', data=data))
+
+    return render_template('data.html', form=form, page='title')
