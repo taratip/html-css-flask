@@ -29,19 +29,14 @@
         {% endif %}
           <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
         </li>
-        {% if page == 'posts' and name == 'Max' %}
+        {% if page == 'posts' %}
           <li class="nav-item active">
         {% else %}
           <li class="nav-item">
         {% endif %}
-          <a class="nav-link" href="{{ url_for('posts', name='Max') }}">Max's Posts</a>
-        </li>
-        {% if page == 'posts' and name == 'Kelly' %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{{ url_for('posts', name='Kelly') }}">Kelly's Posts</a>
+          {% if current_user.is_authenticated %}
+            <a class="nav-link" href="{{ url_for('posts', name=current_user.name) }}">Profile</a>
+          {% endif %}    
         </li>
         {% if page == 'title' %}
           <li class="nav-item active">
@@ -50,6 +45,26 @@
         {% endif %}
           <a class="nav-link" href="{{ url_for('title') }}">Change Title</a>
         </li>
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+        {% else %}
+          {% if page == 'login' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          {% if page == 'register' %}
+            <li class="nav-item active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+          </li>
+        {% endif %}
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

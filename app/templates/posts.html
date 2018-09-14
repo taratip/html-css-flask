@@ -11,12 +11,12 @@
       <div class="col-md-3">
         <div class="row">
           <div class="col-md-12 card">
-            {% for k, v in people.items() %}
-              {% if v.name == name %}
-                <img class="center card-img-top" src="{{ v.url }}" alt="Placeholder Image">
-                <div class="card-title"><b>{{ v.name }}</b></div>
-                <div class="card-subtitle"><b>Age:</b> {{ v.age }}</div>
-                <div class="card-text"><b>Bio:</b> {{ v.bio }}</div>
+            {% for person in people %}
+              {% if person.name == name %}
+                <img class="center card-img-top" src="{{ person.url }}" alt="Placeholder Image">
+                <div class="card-title"><b>{{ person.name }}</b></div>
+                <div class="card-subtitle"><b>Age:</b> {{ person.age }}</div>
+                <div class="card-text"><b>Bio:</b> {{ person.bio }}</div>
                 <button class="btn btn-primary center">Follow</button>
               {% endif %}
             {% endfor %}
@@ -26,11 +26,13 @@
 
       <div class="col-md-8 offset-md-1">
         <!-- Start post form -->
-        <div class="row card">
-          <div class="col-md-12">
-            {{ wtf.quick_form(form) }}
-          </div> <!-- Ends col for form -->
-        </div> <!-- ends row for form -->
+        {% if current_user.is_authenticated and current_user.name == name %}
+          <div class="row card">
+            <div class="col-md-12">
+              {{ wtf.quick_form(form) }}
+            </div> <!-- Ends col for form -->
+          </div> <!-- ends row for form -->
+        {% endif %}
 
         {% for post in posts %}
           {% if post.name == name %}

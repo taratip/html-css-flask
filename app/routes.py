@@ -1,8 +1,9 @@
 from app import app, db
 from flask import render_template, url_for, redirect, flash
-from app.forms import PostForm, TitleForm
+from app.forms import PostForm, TitleForm, LoginForm, RegisterForm
 import datetime
-from app.models import Post
+from app.models import Post, User
+from flask_login import current_user, login_user, logout_user, login_required
 
 
 @app.route('/')
@@ -61,6 +62,7 @@ def index(title=''):
     }
     return render_template('index.html', products=products, title=title, page='home')
 
+
 posts_dict = {
     0: {
         'date': 'Sept. 9th, 2018',
@@ -104,25 +106,28 @@ posts_dict = {
     }
 }
 
+
 @app.route('/posts/<name>', methods=['GET', 'POST'])
-def posts(name = 'Max'):
+@login_required
+def posts(name='Max'):
     form = PostForm()
 
-    people = {
-        0: {
-            'name': 'Max',
-            'age': 26,
-            'bio': 'Avid swimmer, cat lover, and I ride a bike everywhere.',
-            'url': 'http://placehold.it/250x250'
-        },
-        1: {
-            'name': 'Kelly',
-            'age': 21,
-            'bio': 'My name is Kelly, I work in Boston and love dogs <3.',
-            'url': 'http://placehold.it/250x250'
-        }
-    }
+    # people = {
+    #     0: {
+    #         'name': 'Max',
+    #         'age': 26,
+    #         'bio': 'Avid swimmer, cat lover, and I ride a bike everywhere.',
+    #         'url': 'http://placehold.it/250x250'
+    #     },
+    #     1: {
+    #         'name': 'Kelly',
+    #         'age': 21,
+    #         'bio': 'My name is Kelly, I work in Boston and love dogs <3.',
+    #         'url': 'http://placehold.it/250x250'
+    #     }
+    # }
 
+    people = User.query.all()
     posts = Post.query.all()
 
     if form.validate_on_submit():
@@ -144,6 +149,7 @@ def posts(name = 'Max'):
 
 
 @app.route('/title', methods=['GET', 'POST'])
+@login_required
 def title():
     form2 = TitleForm()
 
@@ -152,3 +158,49 @@ def title():
         return redirect(url_for('index', title=title))
 
     return render_template('title.html', form=form2, page='title')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Credentials are incorrect')
+            return redirect(url_for('login'))
+
+        # user is authenticated
+        login_user(user, remember=form.remember_me.data)
+        flash('You are now logged in.')
+        return redirect(url_for('posts', name=user.name))
+
+    return render_template('login.html', form=form, page='login')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        user = User(name=form.name.data, username=form.username.data,
+                    email=form.email.data, bio=form.bio.data, age=form.age.data, url=form.url.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you have successfully registered.')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form, page='register')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+
+    return redirect(url_for('index'))
