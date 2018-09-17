@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Who - {{ super() }}
+{% endblock %}
+
+{% block app_content %}
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <aside>
+        <div class="aside-container">
+          <p><strong>WHO WE ARE</strong></p>
+          <hr>
+          <a class="white-color" href="">Welcome</a><br>
+          <a class="white-color" href="">Attorneys</a><br>
+          <a class="white-color" href="">Staff</a><br>
+          <a class="white-color" href="">Reputation</a><br>
+          <a class="white-color" href="">History</a><br>
+          <figure>
+            <img src="http://placehold.it/156x95" alt="">
+            <figcaption><small><strong>Where We Work</strong><br>
+              Find out more about our work coverage area.</small>
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div> <!-- Ending div for aside column -->
+    <div class="col-md-9 col-sm-12">
+      <div class="article-container">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <div class="small-img-container">
+          <img src="static/img/blackboard-business-chalkboard-355988.jpg" alt="Placeholder Image">
+          <div class="small-img-caption">WELCOME</div>
+        </div>
+        <div class="small-img-container">
+          <img src="static/img/apple-business-click-392018.jpg" alt="Placeholder Image">
+          <div class="small-img-caption">STAFFS</div>
+        </div>
+        <div class="small-img-container">
+          <img src="static/img/black-and-white-building.jpg" alt="Placeholder Image">
+          <div class="small-img-caption">HISTORY</div>
+        </div>
+        <div class="small-img-container">
+          <img src="static/img/arrows-box-business-533189.jpg" alt="Placeholder Image">
+          <div class="small-img-caption">REPUTATION</div>
+        </div>
+      </div> <!-- Ending div for article container -->
+    </div> <!-- Ending div for aside column -->
+  </div> <!-- Ending div for row -->
+{% endblock %}

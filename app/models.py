@@ -4,15 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20), unique=True, index=True)
+
+    def __repr__(self):
+        return 'Role id {}: {}'.format(self.id, self.name)
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    age = db.Column(db.Integer)
-    bio = db.Column(db.String(140))
-    url = db.Column(db.String(100))
-    username = db.Column(db.String(50), unique=True, index=True)
+    first_name = db.Column(db.String(50))
+    last_name = db.Column(db.String(50))
     email = db.Column(db.String(100), unique=True, index=True)
+    role_id = db.Column(db.Integer, nullable=False)
     password_hash = db.Column(db.String(256))
+    bio = db.Column(db.String(140))
+    company_name = db.Column(db.String(100))
 
     def set_password(self, password):
         # generate_password_hash generates password hash with 256 long characters
@@ -23,17 +31,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return 'User {} is {} years old. Bio - {}'.format(self.name, self.age, self.bio)
-
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    tweet = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, default=datetime.now().date())
-    name = db.Column(db.String(50))
-
-    def __repr__(self):
-        return 'Post {}: {}'.format(self.id, self.tweet)
+        return 'User {} {}: Email - {}'.format(self.first_name, self.last_name, self.email)
 
 
 # For loading user information in session

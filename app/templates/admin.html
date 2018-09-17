@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+  Profile - {{ super() }}
+{% endblock %}
+
+{% block app_content %}
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <aside>
+        <div class="aside-container">
+          <p><strong>{{ current_user.first_name }}</strong></p>
+          <hr>
+          <p class="white-color">Email: {{ current_user.email }}<br>
+          Role: {{ role }}</p>
+        </div>
+      </aside>
+    </div> <!-- Ending div for aside column -->
+    <div class="col-md-9 col-sm-12">
+      <div class="article-container">
+        <p><strong>Users</strong></p>
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Role</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+              <tr>
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                {% if user.role_id == 1 %}
+                  <td>Admin</td>
+                {% elif user.role_id == 2 %}
+                  <td>User</td>
+                {% elif user.role_id == 3 %}
+                  <td>Partner</td>
+                {% else %}
+                  <td>Client</td>
+                {% endif %}
+                <td><a href="{{ url_for('edit_users', id=user.id) }}">Edit</a></td>
+              </tr> <!-- Ending row for table -->
+            {% endfor %}
+          </tbody>
+        </table>
+        <hr>
+        <div class="row">
+          <div class="col-md">
+            <a role="button" class="btn btn-secondary btn-sm" href="{{ url_for('profile') }}">Back</a>
+          </div> <!-- Ending div for column -->
+          <div class="col-md">
+          </div> <!-- Ending div for column -->
+          <div class="col-md">
+          </div> <!-- Ending div for column -->
+        </div> <!-- Ending div for row -->
+      </div> <!-- Ending div for article container -->
+    </div> <!-- Ending div for aside column -->
+  </div> <!-- Ending div for row -->
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-  E-Commerce
+  FLASK Project
 {% endblock %}
 
 {% block styles %}
@@ -14,89 +14,85 @@
 {% endblock %}
 
 {% block navbar %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ url_for('index') }}">E-Commerce</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        {% if page == 'home' %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        {% if page == 'posts' %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
-          {% if current_user.is_authenticated %}
-            <a class="nav-link" href="{{ url_for('posts', name=current_user.name) }}">Profile</a>
-          {% endif %}    
-        </li>
-        {% if page == 'title' %}
-          <li class="nav-item active">
-        {% else %}
-          <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{{ url_for('title') }}">Change Title</a>
-        </li>
-        {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-          </li>
-        {% else %}
-          {% if page == 'login' %}
-            <li class="nav-item active">
-          {% else %}
-            <li class="nav-item">
-          {% endif %}
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-          {% if page == 'register' %}
-            <li class="nav-item active">
-          {% else %}
-            <li class="nav-item">
-          {% endif %}
-            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-          </li>
-        {% endif %}
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="main">
+          <header>
+            <a href="{{ url_for('index') }}"><img src="http://placehold.it/318x76" alt="Placeholder Image"></a>
+            <div class="login-container">
+              {% if current_user.is_authenticated %}
+                <a href="{{ url_for('profile') }}">Profile</a> | <a href="{{ url_for('logout') }}">Log Out</a>
+              {% else %}
+                <a href="{{ url_for('login') }}">Log In</a> | <a href="{{ url_for('register') }}">Register</a>
+              {% endif %}
+            </div>
+          </header>
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav nav-fill w-100">
+                <a class="nav-item nav-link" href="{{ url_for('who') }}">WHO WE ARE</a>
+                <a class="nav-item nav-link" href="{{ url_for('what') }}">WHAT WE DO</a>
+                <a class="nav-item nav-link" href="{{ url_for('news') }}">NEWS & EVENTS</a>
+                <a class="nav-item nav-link" href="{{ url_for('where') }}">WHERE WE WORK</a>
+                <a class="nav-item nav-link" href="{{ url_for('contact') }}">CONTACT US</a>
+              </div>
+            </div> <!-- Ending div for navbar collapse -->
+          </nav>
+        </div> <!-- Ending div for navbar conainter -->
+      </div> <!-- Ending div for column -->
+    </div> <!-- Ending div for row -->
+  </div> <!-- Ending div for nav container -->
 {% endblock %}
 
 {% block content %}
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-
-  {% block app_content %}{% endblock %}
-
-  <!-- Start of footer -->
+<div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <footer class="bg-dark">
+    <div class="col-md-10 offset-md-1">
+      <div class="main app-container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div> <!-- Ending div for flash messages -->
+          {% endif %}
+        {% endwith %}
+
+        {% block app_content %}{% endblock %}
+
+        <!-- Starting footer -->
+        <hr class="footer-line">
         <div class="row">
-          <div class="col-md-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <div class="col-md-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <div class="col-md-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        </div> <!-- Ends the row for lorems -->
-      </footer>
-    </div> <!-- Ends the col-12 for footer -->
-  </div> <!-- Ends the row for footer -->
+          <div class="col-md-8 offset-md-2">
+            <a class="footer-link black-color" href="{{ url_for('index') }}">HOME</a> &#8213;
+            <a class="footer-link black-color" href="{{ url_for('who') }}">WHO WE ARE</a> &#8213;
+            <a class="footer-link black-color" href="{{ url_for('what') }}">WHAT WE DO</a> &#8213;
+            <a class="footer-link black-color" href="{{ url_for('news') }}">NEWS & EVENTS</a> &#8213;
+            <a class="footer-link black-color" href="{{ url_for('where') }}">WHERE WE WORK</a> &#8213;
+            <a class="footer-link black-color" href="{{ url_for('contact') }}">CONTACT</a>
+            <div class="text-center footer-note">
+              <a class="grey-color" href="#">©2018 Company</a>
+              <span class="grey-color">//</span>
+              <a class="grey-color" href="#">Website Design by</a>
+            </div>
+          </div> <!-- Ending div for footer column -->
+        </div> <!-- Ending div for footer row -->
+      </div> <!-- Ending div for main -->
+    </div> <!-- Ending div for column -->
+  </div> <!-- Ending div for row -->
+  <div class="row">
+    <footer>
+    </footer>
+  </div> <!-- Ending div for row -->
+</div> <!-- Ending div for container -->
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Where - {{ super() }}
+{% endblock %}
+
+{% block app_content %}
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <aside>
+        <div class="aside-container">
+          <p><strong>WHERE WE WORK</strong></p>
+          <hr>
+          <a class="white-color" href="">United States</a><br>
+          <figure>
+            <img src="http://placehold.it/156x95" alt="">
+            <figcaption><small><strong>Career Opportunities</strong><br>
+              Join our magnificent firm.</small>
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div> <!-- Ending div for aside column -->
+    <div class="col-md-9 col-sm-12">
+      <div class="article-container">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p class="paragraph-title"><strong>UNITED STATES</strong></p>
+        <hr>
+        <div class="row">
+          <div class="col-md">
+            Alabama<br>
+            Alaska<br>
+          </div> <!-- Ending div for state column -->
+          <div class="col-md">
+            Maine<br>
+            Maryland<br>
+          </div> <!-- Ending div for state column -->
+          <div class="col-md">
+            Oklahoma<br>
+            Oregon<br>
+          </div> <!-- Ending div for state column -->
+        </div> <!-- Ending div for state row -->
+      </div> <!-- Ending div for article container -->
+    </div> <!-- Ending div for aside column -->
+  </div> <!-- Ending div for row -->
+{% endblock %}

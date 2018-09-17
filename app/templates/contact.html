@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Contact - {{ super() }}
+{% endblock %}
+
+{% block app_content %}
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <aside>
+        <div class="aside-container">
+          <p><strong>CONTACT US</strong></p>
+          <hr>
+          <a class="white-color" href="">Directions / Parking</a><br>
+          <a class="white-color" href="">Career Opportunities</a><br>
+          <figure>
+            <img src="http://placehold.it/156x95" alt="">
+            <figcaption><small><strong>News & Events</strong><br>
+              Read the most current information.</small>
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </div> <!-- Ending div for aside column -->
+    <div class="col-md-6 col-sm-12" style="padding-right:0">
+      <div class="article-container">
+        <div class="small-img-container" style="margin-top:0;margin-bottom:20px;">
+          <img src="http://placehold.it/360x118" alt="Placeholder Image" style="width:360px;height:118px;">
+        </div>
+        <p>The office hours are 8am – 5pm Monday through Friday</p>
+      </div> <!-- Ending div for article container -->
+    </div> <!-- Ending div for article column -->
+    <div class="col-md-3 col-sm-12" style="padding-left:0">
+      <div class="contact-container" >
+        <img src="http://placehold.it/204x295" alt="Placeholder Image">
+      </div>
+    </div>
+  </div> <!-- Ending div for row -->
+{% endblock %}

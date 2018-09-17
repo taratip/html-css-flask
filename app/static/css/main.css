@@ -1,55 +1,233 @@
 body {
-  margin: 0px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: black;
+  background-image: url("/static/img/abstract-art-backdrop-926985.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow-x: hidden;
 }
 
+header {
+  margin-bottom: 30px;
+}
+
+.login-container {
+  display: inline-block;
+  float: right;
+}
+
+.login-container a {
+  color: #903330;
+}
+
+.main {
+  background-color: white;
+  padding: 40px;
+  padding-bottom: 20px;
+}
+
+.app-container {
+  padding-top: 0;
+}
+
+.navbar.navbar-expand-lg.navbar-light {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 30px;
+}
+
+.navbar-nav > a {
+  border-right: 1px solid #ccc;
+}
+
+.navbar-nav > a:last-child {
+   border: none;
+}
+
+.image-container {
+  margin-right: 15px;
+  margin-top: 30px;
+}
+
+.image-container > img {
+  padding: 2px;
+  border-style: double;
+}
+
+.news-feed-container,
+.aside-container {
+  width: 100%;
+  background-color: #903330;
+  margin-top: 30px;
+  color: white;
+  padding: 10px;
+  min-height: 255px;
+}
+
+.news-feed-container > p,
+.aside-container > p {
+  padding-top: 10px;
+  margin-bottom: 8px;
+}
+
+.news-feed-container > p + hr,
+.aside-container > p + hr {
+  margin-top: 5px;
+  background: white;
+}
+
+.vert .carousel-item-next,
+.vert .active.carousel-item-right {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100% 0);
+}
+
+.vert .carousel-item-prev,
+.vert .active.carousel-item-left {
+-webkit-transform: translate3d(0,-100%, 0);
+        transform: translate3d(0,-100%, 0);
+}
+
+.home-container {
+  margin-top: 30px;
+  margin-right: 15px;
+  padding-right: 10px;
+}
+
+.home-address-container {
+  margin-top: 20px;
+  padding-left: 10px;
+  line-height: 12px;
+}
+
+.home-address-container a:link {
+  text-decoration: underline;
+  color: #903330;
+}
+
+hr.footer-line {
+  margin-bottom: 5px;
+  background-color: black;
+}
+
+a.footer-link,
+a.footer-link:link,
+a.footer-link:visited,
+div.footer-note > a,
+div.footer-note > a:link,
+div.footer-note > a:visited {
+  font-size: 10px;
+}
+
+a.footer-link:hover,
+div.footer-note > a:hover {
+  text-decoration: none;
+  color: #903330;
+}
+
+div.footer-note {
+  margin-top: 15px;
+}
+
+.black-color {
+  color: black;
+}
+
+.grey-color {
+  color: #c0c0c0;
+}
+
+.white-color {
+  color: white;
+}
+
 footer {
-  padding: 25px;
-  color: rgba(255,255,255,.5)
+  height: 40px;
 }
 
-.extra-margin {
-  margin: 50px 0px;
+.aside-container a {
+  line-height: 25px;
 }
 
-.center {
-  display: block;
-  margin: 20px auto;
+.aside-container a:hover,
+a.sub-link:hover {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.pic_text {
-  padding-top: 50px;
+a.sub-link {
+  padding-left: 15px;
+  line-height: 12px;
+  font-size: 90%;
+}
+
+.aside-container img {
+  margin-top: 15px;
+  width: 100%;
 }
 
 figcaption {
-  text-align: center;
+  line-height: 12px;
 }
 
-.btn-primary {
-  color: rgba(255,255,255,.5);
-  background-color: #343a40!important;
-  border-color: #343a40!important;
+.article-container,
+.paragraph-title,
+.contact-container {
+  margin-top: 30px;
 }
 
-.card {
-  margin: 25px;
-  padding: 25px;
-  box-shadow: 0px 0px 5px 0px grey;
+.article-container img {
+  width: 280px;
+  height: 115px;
+  object-fit: cover;
 }
 
-.no-box-space {
-  margin: 25px;
-  padding: 25px;
-}
-
-.card-subtitle {
-  font-style: italic;
-  padding-bottom: 10px;
-}
-
-.prof_pic {
+.small-img-container {
+  margin: 5px 5px 5px 0;
+  padding: 3px;
   position: relative;
-  top: 7px;
-  left: 7px;
-  width: 25px;
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  border-style: double;
+  border-color: black;
+}
+
+.small-img-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+}
+
+a.news-link,
+a.news-link:link,
+a.news-link:visited {
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a.news-link:hover {
+  color: #903330;
+  font-weight: normal;
+}
+
+p.paragraph-title {
+  margin-bottom: 5px;
+}
+
+.article-container > p + p + hr {
+  margin-top: 5px;
+  background: black;
+}
+
+input.btn.btn-primary {
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+  background-color: #903330;
+  border-color: #903330;
 }

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+  Profile - {{ super() }}
+{% endblock %}
+
+{% block app_content %}
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <aside>
+        <div class="aside-container">
+          <p><strong>{{ current_user.first_name }}'s Profile</strong></p>
+          <hr>
+          <p class="white-color">Email: {{ current_user.email }}<br>
+          Role: {{ role }}</p>
+        </div>
+      </aside>
+    </div> <!-- Ending div for aside column -->
+    <div class="col-md-9 col-sm-12">
+      <div class="article-container">
+        <p>About Me: {{ current_user.bio }}</p>
+        <p>Company: {{ current_user.company_name }}</p>
+        <hr>
+        <div class="row">
+          <div class="col-md">
+            {% if role == 'Admin' %}
+              <a role="button" class="btn btn-secondary btn-sm" href="{{ url_for('admin') }}">Admin Section</a>
+            {% endif %}
+            <a role="button" class="btn btn-outline-info btn-sm" href="{{ url_for('edit_profile') }}">Edit</a>
+          </div> <!-- Ending div for column -->
+          <div class="col-md">
+          </div> <!-- Ending div for column -->
+          <div class="col-md">
+          </div> <!-- Ending div for column -->
+        </div> <!-- Ending div for row -->
+      </div> <!-- Ending div for article container -->
+    </div> <!-- Ending div for aside column -->
+  </div> <!-- Ending div for row -->
+{% endblock %}

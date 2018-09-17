@@ -5,57 +5,53 @@
 {% endblock %}
 
 {% block app_content %}
-  <div class="container">
-    <div class="row extra-margin">
-      <div class="col-md-12">
-        {% if title == '' %}
-          <h1>E-Commerce Title</h1>
-        {% else %}
-          <h1>{{ title }}</h1>
-        {% endif %}
-      </div> <!-- Ends the col for title -->
-    </div> <!-- Ends the row for title -->
-
-    <div class="row">
-      <div class="col-md-12">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100" src="http://placehold.it/800x200" alt="First slide">
+  <div class="row">
+    <div class="col-md-8 col-sm-12">
+      <div class="image-container">
+        <img src="static/img/clouds-eco-environment-9198.jpg" style="height:360px;" alt="Placeholder Image">
+      </div>
+    </div> <!-- Ending div for image column -->
+    <div class="col-md-4 col-sm-12">
+      <aside>
+        <div class="news-feed-container" style="height: 360px;">
+          <p><strong>NEWS FEED</strong></p>
+          <hr>
+          <div id="newsCarousel" class="carousel vert slide" data-ride="carousel" data-interval="5000">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <p style="height:280px;">Some quick example text to build on the card title and make up the bulk of the card's content. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              </div> <!-- Ending div of carousel item -->
+              <div class="carousel-item">
+                <p style="height:280px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+              </div> <!-- Ending div of carousel item -->
+              <div class="carousel-item">
+                <p style="height:280px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              </div> <!-- Ending div of carousel item -->
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="http://placehold.it/800x200" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="http://placehold.it/800x200" alt="Third slide">
-            </div>
-          </div> <!-- Ends carousel-inner div -->
-        </div> <!-- Ends div container for entire carousel -->
-      </div> <!-- Ends col-12 for carousel -->
-    </div> <!-- Ends row for carousel -->
-
-    <!-- Starts product cards -->
-    {% for k, v in products.items() %}
-      {% if loop.index == 1 or loop.index % 3 == 1 %}
-        <div class="row extra-margin">
-      {% endif %}
-        <div class="col-md card">
-          <img class="center card-img-top" src="{{ v.url }}" alt="Placeholder Image">
-          <div class="card-title">{{ v.title }}</div>
-          <div class="card-subtitle">${{ v.price }}</div>
-          <div class="card-text">{{ v.desc }}</div>
-          <button class="btn btn-primary center">Add To Cart</button>
-        </div> <!-- Ends card -->
-      {% if loop.index == loop.length and loop.index % 3 == 1 %}
-        <div class="col-md no-box-space"></div>
-        <div class="col-md no-box-space"></div>
-      {% elif loop.index == loop.length and loop.index % 3 == 2 %}
-        <div class="col-md no-box-space"></div>
-      {% endif %}
-      {% if loop.index % 3 == 0 or loop.index == loop.length %}
-        </div> <!-- Ends row for cards -->
-      {% endif %}
-    {% endfor %}
-
-  </div> <!-- Ends the container -->
+          </div> <!-- Ending div of carousel -->
+        </div> <!-- Ending div for news container -->
+      </aside>
+    </div> <!-- Ending div for aside column -->
+  </div> <!-- Ending div for row -->
+  <div class="row">
+    <div class="col-md-8">
+      <div class="home-container">
+        <p><strong>Welcome to our website!</strong></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div> <!-- Ending div for welcome column -->
+    <div class="col-md-4">
+      <div class="home-address-container">
+        <p>
+          <small>
+            <strong>Company name</strong><br>
+            123 Street Road, Suite 1200<br>
+            City, State 10000<br>
+            123-123-1234 phone<br>
+            123-123-1234 fax<br>
+          <a href="mailto:email@test.com" target="_top">email@test.com</a>
+        </small></p>
+      </div>
+    </div> <!-- Ending div for address column -->
+  </div> <!-- Ending div for row -->
 {% endblock %}
